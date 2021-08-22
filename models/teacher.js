@@ -20,4 +20,4 @@ const teacherSchema = mongoose.Schema({
         required:true,
     }
 })
-module.exports = mongoose.models('Teachers', teacherSchema);
+module.exports = mongoose.models('Teacher', teacherSchema);

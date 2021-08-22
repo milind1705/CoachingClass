@@ -12,12 +12,21 @@ const studentSchema = mongoose.Schema({
     },
     mobile:{
         type: Number,
-        required:true,
-        unique:true
+        required:true
     },
-    password:{
+   class:{
         type: String,
         required:true,
-    }
+    },
+    sbjects:[{
+        type: String,
+        required:true,
+    }],
+    feesDetails:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Fee"
+    },
+
+
 })
-module.exports = mongoose.models('Students', studentSchema);
+module.exports = mongoose.models('Student', studentSchema);
