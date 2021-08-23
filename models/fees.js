@@ -20,4 +20,4 @@ const feesSchema = mongoose.Schema({
         required:true,
     }
 })
-module.exports = mongoose.models('Fee', feesSchema);
+module.exports = mongoose.model('Fee', feesSchema);
