@@ -7,6 +7,7 @@ const app = express();
 
 //export files
 const teacherRouter = require('./routes/teacher');
+const studentrouter = require('./routes/student');
 
 //middleware
 app.use(express.json());
@@ -20,7 +21,7 @@ mongoose.connect(process.env.MONGO_URL, {
 });
 
 mongoose.connection.once('open', ()=>{
-    console.log("concted with database")
+    console.log("connected with database")
 })
 //router
 app.get('/', (req, res) => {
@@ -28,6 +29,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/teacher', teacherRouter);
+app.use('/student', studentrouter);
 
 
 
