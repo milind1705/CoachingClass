@@ -8,6 +8,7 @@ const app = express();
 //export files
 const teacherRouter = require('./routes/teacher');
 const studentrouter = require('./routes/student');
+const classRouter = require('./routes/class');
 
 //middleware
 app.use(express.json());
@@ -30,6 +31,7 @@ app.get('/', (req, res) => {
 
 app.use('/teacher', teacherRouter);
 app.use('/student', studentrouter);
+app.use('/class', classRouter);
 
 
 
