@@ -28,7 +28,7 @@ module.exports.get_allStudents = (req, res) => {
 }
 
 module.exports.get_studentById =(req, res) => {
-    Students.findById({ _id: req.params.id})
+    Students.findById({ _id: req.params.id}).populate("feesDetails")
     .then((data) => {
         return res.status(200).json({data})
     })

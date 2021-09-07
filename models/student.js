@@ -23,11 +23,11 @@ const studentSchema = mongoose.Schema({
         type: String,
         required:true,
     }],
-    feesDetails:{
+    feesDetails: [{
         type: mongoose.Schema.Types.ObjectId,
         ref:"Fee"
-    },
+    }],
 
 
-})
+}, {timestamps: true})
 module.exports = mongoose.model('Student', studentSchema);

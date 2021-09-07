@@ -9,6 +9,7 @@ const app = express();
 const teacherRouter = require('./routes/teacher');
 const studentrouter = require('./routes/student');
 const classRouter = require('./routes/class');
+const feesRoute = require('./routes/fees');
 
 //middleware
 app.use(express.json());
@@ -18,7 +19,8 @@ app.use(express.urlencoded({extended:false}));
 mongoose.connect(process.env.MONGO_URL, {
     useCreateIndex:true,
     useNewUrlParser:true,
-    useUnifiedTopology:true
+    useUnifiedTopology:true,
+    useFindAndModify: false
 });
 
 mongoose.connection.once('open', ()=>{
@@ -32,6 +34,7 @@ app.get('/', (req, res) => {
 app.use('/teacher', teacherRouter);
 app.use('/student', studentrouter);
 app.use('/class', classRouter);
+app.use('/fees', feesRoute)
 
 
 

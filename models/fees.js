@@ -10,14 +10,17 @@ const feesSchema = mongoose.Schema({
         type: Number,
         required:true,
     },
-    feesPaid:{
+    date:{
+        type: Date,
+        default: Date.now()
+    },
+    paidFees:{
         type: Number,
     },
     //totalFees - BalenceFee
     balenceFees:{
         type: Number,
-        default: totalFees,
-        required:true,
+        //required:true,
     }
-})
+}, {timestamps: true})
 module.exports = mongoose.model('Fee', feesSchema);
