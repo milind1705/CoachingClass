@@ -1,10 +1,10 @@
-const student = require("../models/student");
+const Attendance =require('../models/attendance');
 const Students = require("../models/student");
 
-module.exports.create_student = (req, res) => {
-    const newStudent = new Students(req.body);
+module.exports.create_attendanceEntry = (req, res) => {
+    const newAttendanceEntry= new Attendance(req.body);
 
-    newStudent
+    newAttendanceEntry
         .save()
             .then((data)=>{
                 return res.status(200).json({
@@ -16,8 +16,8 @@ module.exports.create_student = (req, res) => {
             })
 };
 
-module.exports.get_allStudents = (req, res) => {
-    Students.find().then((data) => {
+module.exports.get_allEntries= (req, res) => {
+    Attendance.find().then((data) => {
         return res.status(200).json({data})
     })
     .catch((err) => {
@@ -27,8 +27,8 @@ module.exports.get_allStudents = (req, res) => {
     })
 }
 
-module.exports.get_studentById =(req, res) => {
-    Students.findById({ _id: req.params.id}).populate("feesDetails")
+module.exports.get_EntrybyId =(req, res) => {
+    Attendance.findById({ _id: req.params.id}).populate("presentStudent")
     .then((data) => {
         return res.status(200).json({data})
     })
@@ -37,12 +37,12 @@ module.exports.get_studentById =(req, res) => {
     })
 }
 
-module.exports.update_details = (req, res) => {
-    Students.findByIdAndUpdate({_id: req.params.id}, req.body)
+module.exports.update_attendanceEntry = (req, res) => {
+    Attendance.findByIdAndUpdate({_id: req.params.id}, req.body)
         .then(() => {
-            Students.findOne({_id: req.params.id})
-            .then((student) => {
-                return res.status(200).json(student)
+            Attendance.findOne({_id: req.params.id})
+            .then((attendance) => {
+                return res.status(200).json(attendance)
             })
             .catch((err) => {
                 return res.status(400).json({message: err.message || "something went wrong while updating students information"})
@@ -53,9 +53,16 @@ module.exports.update_details = (req, res) => {
 }
 
 
-module.exports.delete_student = (req, res) => {
+module.exports.delete_attendanceEntry= (req, res) => {
     Students.findOneAndDelete({_id: req.params.id})
     .then(() => {
         return res.status(200).json({message: "students details successfully deleted"})
     })
 }
+
+module.exports.add_presentStudent = (req, res) => {
+    const attendance = Attendance.findById({_id: req.params.id})
+    attendance.presentStudent.push(req.body.studentId);
+    attendance.save();
+}
+

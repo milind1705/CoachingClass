@@ -10,6 +10,7 @@ const teacherRouter = require('./routes/teacher');
 const studentrouter = require('./routes/student');
 const classRouter = require('./routes/class');
 const feesRoute = require('./routes/fees');
+const attendanceRoute = require('./routes/attendanceRouter')
 
 //middleware
 app.use(express.json());
@@ -34,7 +35,8 @@ app.get('/', (req, res) => {
 app.use('/teacher', teacherRouter);
 app.use('/student', studentrouter);
 app.use('/class', classRouter);
-app.use('/fees', feesRoute)
+app.use('/fees', feesRoute);
+app.use('/attendance', attendanceRoute)
 
 
 
